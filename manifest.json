@@ -70,9 +70,6 @@
       "run_at": "document_start"
     }
   ],
-  "options_ui": {
-    "page": "data/options/index.html"
-  },
   "web_accessible_resources": [
     {
       "resources": ["data/inject/selector.png"],
