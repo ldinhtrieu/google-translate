@@ -25,8 +25,7 @@ const open = (tab, query, frameId, permanent = false) =>
           scale: 1.0,
           "force-inside": true,
           "hide-translator": true,
-          "google-extra": "",
-          domain: "com",
+          "cambridge-extra": "",
         },
         (prefs) => {
           chrome.windows.get(tab.windowId, async (win) => {
@@ -110,8 +109,7 @@ const onClicked = (info, tab) => {
   } else {
     chrome.storage.local.get(
       {
-        domain: "com",
-        "google-extra": "",
+        "cambridge-extra": "",
       },
       (prefs) => {
         let link = info.linkUrl || info.pageUrl;
@@ -129,14 +127,14 @@ const onClicked = (info, tab) => {
   const onStartup = () => {
     chrome.storage.local.get(
       {
-        "google-page": true,
+        "cambridge-page": true,
       },
       (prefs) => {
-        if (prefs["google-page"]) {
+        if (prefs["cambridge-page"]) {
           chrome.contextMenus.create(
             {
-              id: "open-google",
-              title: "Translate with Google",
+              id: "open-cambridge",
+              title: " Look the word up in cambridge dictionary.",
               contexts: ["page", "link"],
               documentUrlPatterns: ["*://*/*"],
             },
@@ -154,7 +152,7 @@ chrome.contextMenus.onClicked.addListener(onClicked);
 chrome.action.onClicked.addListener((tab) =>
   chrome.storage.local.get(
     {
-      "default-action": "open-google",
+      "default-action": "open-cambridge",
     },
     (prefs) =>
       onClicked(

@@ -15,8 +15,8 @@ const pointer = {
     pointer.hide();
 
     const div = (pointer.div = document.createElement("div"));
-    div.title = `Click to open Google Translate
-Ctrl/Meta + Click to open permanent Google Translate`;
+    div.title = `Click to open Cambridge dictionary
+Ctrl/Meta + Click to open permanent cambridge dictionary`;
     chrome.storage.local.get(
       {
         "offset-x": 0,
