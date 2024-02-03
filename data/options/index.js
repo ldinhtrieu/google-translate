@@ -11,11 +11,9 @@ function restore() {
       "offset-x": 0,
       "offset-y": 0,
       domain: "com",
-      "use-pointer": true,
       "force-inside": true,
       "direct-frame": false,
       "google-page": true,
-      "reuse-page": true,
       "default-action": "open-google",
       "translate-styles": "",
       "hide-translator": true,
@@ -30,18 +28,10 @@ function restore() {
       document.getElementById("offset-y").value = prefs["offset-y"];
       document.getElementById("domain").value = prefs.domain;
       document.getElementById("google-page").checked = prefs["google-page"];
-      document.getElementById("reuse-page").checked = prefs["reuse-page"];
-      document.getElementById("default-action").value = prefs["default-action"];
       document.getElementById("hide-translator").checked =
         prefs["hide-translator"];
       document.getElementById("google-extra").value = prefs["google-extra"];
-      if (prefs["use-pointer"] && prefs["direct-frame"] === false) {
-        document.getElementById("use-pointer").checked = true;
-      } else if (prefs["direct-frame"]) {
-        document.getElementById("use-direct").checked = true;
-      } else {
-        document.getElementById("use-selection").checked = true;
-      }
+
       document.getElementById("translate-styles").value =
         prefs["translate-styles"];
     }
@@ -63,10 +53,7 @@ function save() {
     "offset-x": Number(document.getElementById("offset-x").value),
     "offset-y": Number(document.getElementById("offset-y").value),
     domain: document.getElementById("domain").value,
-    "use-pointer": document.getElementById("use-pointer").checked,
-    "direct-frame": document.getElementById("use-direct").checked,
     "google-page": document.getElementById("google-page").checked,
-    "reuse-page": document.getElementById("reuse-page").checked,
     "default-action": document.getElementById("default-action").value,
     "translate-styles": document.getElementById("translate-styles").value,
     "hide-translator": document.getElementById("hide-translator").checked,
@@ -91,19 +78,6 @@ document.getElementById("save").addEventListener("click", () => {
 });
 
 chrome.storage.onChanged.addListener((prefs) => {
-  const mouse = prefs["use-pointer"];
-  if (mouse) {
-    if (mouse.newValue) {
-      chrome.contextMenus.remove("open-panel");
-    } else {
-      chrome.contextMenus.create({
-        id: "open-panel",
-        title: "Translate Selection",
-        contexts: ["selection"],
-        documentUrlPatterns: ["*://*/*"],
-      });
-    }
-  }
   const google = prefs["google-page"];
   if (google) {
     if (google.newValue) {

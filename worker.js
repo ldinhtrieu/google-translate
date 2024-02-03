@@ -116,7 +116,6 @@ const onClicked = (info, tab) => {
       {
         domain: "com",
         "google-extra": "",
-        "reuse-page": true,
       },
       (prefs) => {
         let link = info.linkUrl || info.pageUrl;
@@ -128,16 +127,6 @@ const onClicked = (info, tab) => {
           `?${
             prefs["google-extra"] ? prefs["google-extra"] + "&" : ""
           }u=${encodeURIComponent(link)}`;
-
-        // when this is a page translation, offer redirection
-        if (!info.linkUrl && prefs["reuse-page"]) {
-          chrome.tabs.update(tab.id, { url });
-        } else {
-          chrome.tabs.create({
-            url,
-            index: tab.index + 1,
-          });
-        }
       }
     );
   }
@@ -148,21 +137,9 @@ const onClicked = (info, tab) => {
   const onStartup = () => {
     chrome.storage.local.get(
       {
-        "use-pointer": true,
         "google-page": true,
       },
       (prefs) => {
-        if (prefs["use-pointer"] === false) {
-          chrome.contextMenus.create(
-            {
-              id: "open-panel",
-              title: "Translate Selection",
-              contexts: ["selection"],
-              documentUrlPatterns: ["*://*/*"],
-            },
-            () => chrome.runtime.lastError
-          );
-        }
         if (prefs["google-page"]) {
           chrome.contextMenus.create(
             {
