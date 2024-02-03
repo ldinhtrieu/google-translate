@@ -59,23 +59,9 @@ function save() {
     "hide-translator": document.getElementById("hide-translator").checked,
     "google-extra": document.getElementById("google-extra").value,
   };
-
-  chrome.storage.local.set(prefs, () => {
-    toast.textContent = "Options saved.";
-    setTimeout(() => (toast.textContent = ""), 750);
-    restore();
-  });
 }
 
 document.addEventListener("DOMContentLoaded", restore);
-document.getElementById("save").addEventListener("click", () => {
-  try {
-    save();
-  } catch (e) {
-    toast.textContent = e.message;
-    setTimeout(() => (toast.textContent = ""), 750);
-  }
-});
 
 chrome.storage.onChanged.addListener((prefs) => {
   const google = prefs["google-page"];
@@ -92,30 +78,3 @@ chrome.storage.onChanged.addListener((prefs) => {
     }
   }
 });
-
-// support
-document.getElementById("support").addEventListener("click", () =>
-  chrome.tabs.create({
-    url: chrome.runtime.getManifest().homepage_url + "?rd=donate",
-  })
-);
-// reset
-document.getElementById("reset").addEventListener("click", (e) => {
-  if (e.detail === 1) {
-    toast.textContent = "Double-click to reset!";
-    window.setTimeout(() => (toast.textContent = ""), 750);
-  } else {
-    localStorage.clear();
-    chrome.storage.local.clear(() => {
-      chrome.runtime.reload();
-      window.close();
-    });
-  }
-});
-
-// links
-for (const a of [...document.querySelectorAll("[data-href]")]) {
-  if (a.hasAttribute("href") === false) {
-    a.href = chrome.runtime.getManifest().homepage_url + "#" + a.dataset.href;
-  }
-}
