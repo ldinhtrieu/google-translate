@@ -46,11 +46,7 @@ const open = (tab, query, frameId, permanent = false) =>
             }
 
             const url =
-              "https://translate.google." +
-              prefs.domain +
-              "/?" +
-              (prefs["google-extra"] ? prefs["google-extra"] + "&" : "") +
-              "text=" +
+              "https://dictionary.cambridge.org/dictionary/english/" +
               encodeURIComponent(query);
 
             chrome.windows
@@ -122,11 +118,7 @@ const onClicked = (info, tab) => {
         if (link.startsWith("about:reader?url=")) {
           link = decodeURIComponent(link.replace("about:reader?url=", ""));
         }
-        let url =
-          `https://translate.google.${prefs.domain}/translate` +
-          `?${
-            prefs["google-extra"] ? prefs["google-extra"] + "&" : ""
-          }u=${encodeURIComponent(link)}`;
+        let url = `https://dictionary.cambridge.org/dictionary/english/${info.selectionText}`;
       }
     );
   }

@@ -21,25 +21,7 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "exclude_matches": [
-        "*://translate.google.com/*",
-        "*://translate.google.com.hk/*",
-        "*://translate.google.com.tr/*",
-        "*://translate.google.com.tw/*",
-        "*://translate.google.com.ua/*",
-        "*://translate.google.com.as/*",
-        "*://translate.google.com.vn/*",
-        "*://translate.google.co.in/*",
-        "*://translate.google.co.jp/*",
-        "*://translate.google.co.kr/*",
-        "*://translate.google.co.uk/*",
-        "*://translate.google.cn/*",
-        "*://translate.google.de/*",
-        "*://translate.google.fr/*",
-        "*://translate.google.it/*",
-        "*://translate.google.pl/*",
-        "*://translate.google.ru/*"
-      ],
+      "exclude_matches": ["*://dictionary.cambridge.org/dictionary/english/*"],
       "js": ["data/inject/selector.js"],
       "css": ["data/inject/selector.css"],
       "run_at": "document_start",
@@ -47,25 +29,7 @@
       "match_about_blank": true
     },
     {
-      "matches": [
-        "*://translate.google.com/*",
-        "*://translate.google.com.hk/*",
-        "*://translate.google.com.tr/*",
-        "*://translate.google.com.tw/*",
-        "*://translate.google.com.ua/*",
-        "*://translate.google.com.as/*",
-        "*://translate.google.com.vn/*",
-        "*://translate.google.co.in/*",
-        "*://translate.google.co.jp/*",
-        "*://translate.google.co.kr/*",
-        "*://translate.google.co.uk/*",
-        "*://translate.google.cn/*",
-        "*://translate.google.de/*",
-        "*://translate.google.fr/*",
-        "*://translate.google.it/*",
-        "*://translate.google.pl/*",
-        "*://translate.google.ru/*"
-      ],
+      "matches": ["*://dictionary.cambridge.org/dictionary/english/*"],
       "js": ["data/inject/extend.js"],
       "run_at": "document_start"
     }
