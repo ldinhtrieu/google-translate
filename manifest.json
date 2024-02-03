@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "version": "0.6.2",
-  "name": "Popup View for Google™ Translate",
-  "description": "Access to a floating multilingual Google™ Translate popup on any webpage",
+  "name": "Popup View for Cambridge™ dictionary.",
+  "description": "Access to a floating multilingual Cambridge™ dictionary. popup on any webpage",
   "permissions": ["activeTab", "scripting", "storage", "contextMenus"],
   "host_permissions": ["*://*/*"],
   "icons": {
