@@ -122,33 +122,6 @@ const onClicked = (info, tab) => {
   }
 };
 
-/* context menu */
-{
-  const onStartup = () => {
-    chrome.storage.local.get(
-      {
-        "cambridge-page": true,
-      },
-      (prefs) => {
-        if (prefs["cambridge-page"]) {
-          chrome.contextMenus.create(
-            {
-              id: "open-cambridge",
-              title: " Look the word up in cambridge dictionary.",
-              contexts: ["page", "link"],
-              documentUrlPatterns: ["*://*/*"],
-            },
-            () => chrome.runtime.lastError
-          );
-        }
-      }
-    );
-  };
-  chrome.runtime.onInstalled.addListener(onStartup);
-  chrome.runtime.onStartup.addListener(onStartup);
-}
-chrome.contextMenus.onClicked.addListener(onClicked);
-
 chrome.action.onClicked.addListener((tab) =>
   chrome.storage.local.get(
     {
